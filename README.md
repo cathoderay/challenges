@@ -1,4 +1,4 @@
 challenges
 ==========
 
-challenges
+Sieve challenges repository.
