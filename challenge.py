@@ -12,6 +12,7 @@ from lxml.html import fromstring
 def get_price(html, xpath):
     return fromstring(html).xpath(xpath)[0]
 
+
 def clean_price(raw_price):
     pass
 
