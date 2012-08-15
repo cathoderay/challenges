@@ -54,12 +54,17 @@ class ChallengeTest(unittest.TestCase):
 
     def test_should_not_raise_exception_when_url_does_not_exist(self):
         url = "http://youaresobeautiful4242.com"
+        expected = "Can't fetch html from url."
         result = challenge.fetch_html_from_url(url)
-        expected = "Can't fetch url."
         self.assertTrue(expected.startswith(expected), result)
 
+    def test_check_if_redirect_happened(self):
+        url = "http://www.americanas.com.br/produto/spam_and_eggs"
+        expected = "Redirect to home."
+        result = challenge.fetch_html_from_url(url)
+        self.assertTrue(result.find(expected) > 0)
+
     #TODO: add more tests
-       
 
 if __name__ == "__main__":
     unittest.main()

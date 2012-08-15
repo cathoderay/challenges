@@ -5,6 +5,9 @@
 # Author: Ronald Kaiser <raios DOT catodicos AT gmail DOT com>
 #
 
+# TODO: change structure to support short circuit
+
+
 import re
 import sys
 
@@ -16,7 +19,8 @@ def get_raw_price(html, xpath):
     try:
         return fromstring(html).xpath(xpath)[0]
     except Exception:
-        return ''
+        print "Can't find price in html."
+        return ""
 
 
 def clean_price(raw_price):
@@ -26,14 +30,21 @@ def clean_price(raw_price):
                 .replace('.', '')
                 .replace(',', '.'))
     except Exception:
+        print "Can't clean price."
         return raw_price
 
 
 def fetch_html_from_url(url):
     try:
-        return requests.get(url).text
+        r = requests.get(url)
+        if len(r.history) > 0 and \
+            str(r.history[0].status_code).startswith('3') and \
+            r.history[0].headers['location'].lower() == "http://www.americanas.com.br/":
+            print "Redirect to home."
     except Exception, e:
-        print "Can't fetch url. %s" % e
+        print "Can't fetch html from url. %s" % e
+        return ""
+    return r.text
 
 
 def get_price(url, xpath):
