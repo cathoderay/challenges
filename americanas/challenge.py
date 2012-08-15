@@ -36,7 +36,7 @@ def fetch_html_from_url(url):
 def get_price(url, xpath):
     return clean_price(
             get_raw_price(
-             fetch_html_from_url(sys.argv[1]), 
+             fetch_html_from_url(url), 
              xpath))
 
 
