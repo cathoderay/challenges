@@ -34,12 +34,16 @@ def clean_price(raw_price):
         return raw_price
 
 
+def redirected_to_home(r):
+    return len(r.history) > 0 and \
+           str(r.history[0].status_code).startswith('3') and \
+           r.history[0].headers['location'].lower() == "http://www.americanas.com.br/"
+
+
 def fetch_html_from_url(url):
     try:
         r = requests.get(url)
-        if len(r.history) > 0 and \
-            str(r.history[0].status_code).startswith('3') and \
-            r.history[0].headers['location'].lower() == "http://www.americanas.com.br/":
+        if redirected_to_home(r):
             print "Redirect to home."
     except Exception, e:
         print "Can't fetch html from url. %s" % e
