@@ -19,13 +19,13 @@ def clean_price(raw_price):
     pass
 
 
-def get_html_from_url(url):
+def fetch_html_from_url(url):
     return requests.get(url).text
 
 
 if __name__ == "__main__":
     xpath = "//p[@class='sale price']//span[@class='amount']/text()" 
     if len(sys.argv) > 1:
-        print get_raw_price(get_html_from_url(sys.argv[1]), xpath)
+        print get_raw_price(fetch_html_from_url(sys.argv[1]), xpath)
     else:
         print "Usage: ./challenge.py url"
