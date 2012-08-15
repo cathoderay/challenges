@@ -5,6 +5,7 @@
 # Author: Ronald Kaiser <raios DOT catodicos AT gmail DOT com>
 #
 
+import re
 import sys
 
 import requests 
@@ -16,7 +17,7 @@ def get_raw_price(html, xpath):
 
 
 def clean_price(raw_price):
-    pass
+    return re.search('.*R\$ ([0-9.,]+).*', raw_price).group(1)
 
 
 def fetch_html_from_url(url):
