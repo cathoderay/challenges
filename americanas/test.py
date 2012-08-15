@@ -29,9 +29,10 @@ class ChallengeTest(unittest.TestCase):
 
     def test_detect_unavailable_product(self):
         html = self.get_html('unavailable.html')
-        xpath = "//div[@class='unavailProd']"
+        xpath = "//p[@class='sale price']//span[@class='amount']/text()"
+        unv_xpath = "//div[@class='unavailProd']"
         expected = "Unavailable"
-        result = challenge.get_raw_price(html, xpath)
+        result = challenge.get_raw_price(html, xpath, unv_xpath)
         self.assertEqual(expected, result)
 
     def test_cleaning_price_with_dot(self):
