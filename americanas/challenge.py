@@ -22,15 +22,18 @@ def get_raw_price(html, xpath):
 def clean_price(raw_price):
     try:
         return float(
-                re.search('.*R\$ ([0-9.,]+).*', raw_price).group(1).
-                 replace('.', '').
-                  replace(',', '.'))
+                re.search('.*R\$ ([0-9.,]+).*', raw_price).group(1)
+                .replace('.', '')
+                .replace(',', '.'))
     except Exception:
         return raw_price
 
 
 def fetch_html_from_url(url):
-    return requests.get(url).text
+    try:
+        return requests.get(url).text
+    except Exception, e:
+        print "Can't fetch url. %s" % e
 
 
 def get_price(url, xpath):
