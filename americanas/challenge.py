@@ -29,4 +29,4 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         print get_price(get_html_from_url(sys.argv[1]), xpath)
     else:
-        print "Usage: challenge url"
+        print "Usage: ./challenge.py url"
