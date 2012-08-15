@@ -13,7 +13,10 @@ from lxml.html import fromstring
 
 
 def get_raw_price(html, xpath):
-    return fromstring(html).xpath(xpath)[0]
+    try:
+        return fromstring(html).xpath(xpath)[0]
+    except IndexError:
+        return ''
 
 
 def clean_price(raw_price):

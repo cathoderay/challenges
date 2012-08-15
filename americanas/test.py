@@ -27,6 +27,12 @@ class ChallengeTest(unittest.TestCase):
         result = challenge.get_raw_price(html, xpath)
         self.assertEqual(expected, result)
 
+    def test_should_return_empty_if_doesnt_find_xpath(self):
+        html = self.get_html('example.html') 
+        xpath = "//p[@class='love is all you need']"
+        expected = ""
+        result = challenge.get_raw_price(html, xpath)
+
     def test_cleaning_price_with_dot(self):
         raw_price = "Por: R$ 3.999,00"
         expected = 3999.0
