@@ -15,7 +15,7 @@ import requests
 from lxml.html import fromstring
 
 
-def get_raw_price(html, xpath):
+def get_raw_price(html, xpath, unv_xpath=""):
     try:
         return fromstring(html).xpath(xpath)[0]
     except Exception:
@@ -30,7 +30,6 @@ def clean_price(raw_price):
                 .replace('.', '')
                 .replace(',', '.'))
     except Exception:
-        print "Can't clean price."
         return raw_price
 
 
@@ -45,6 +44,7 @@ def fetch_html_from_url(url):
         r = requests.get(url)
         if redirected_to_home(r):
             print "Redirect to home."
+            return ""
     except Exception, e:
         print "Can't fetch html from url. %s" % e
         return ""
@@ -60,7 +60,8 @@ def get_price(url, xpath):
 
 if __name__ == "__main__":
     xpath = "//p[@class='sale price']//span[@class='amount']/text()" 
+    unv_xpath = "//div[@class='unavailProd']"
     if len(sys.argv) > 1:
-        print get_price(sys.argv[1], xpath)
+        print get_price(sys.argv[1], xpath, unv_xpath)
     else:
         print "Usage: ./challenge.py url"

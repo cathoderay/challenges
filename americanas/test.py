@@ -27,6 +27,13 @@ class ChallengeTest(unittest.TestCase):
         result = challenge.get_raw_price(html, xpath)
         self.assertEqual(expected, result)
 
+    def test_detect_unavailable_product(self):
+        html = self.get_html('unavailable.html')
+        xpath = "//div[@class='unavailProd']"
+        expected = "Unavailable"
+        result = challenge.get_raw_price(html, xpath)
+        self.assertEqual(expected, result)
+
     def test_cleaning_price_with_dot(self):
         raw_price = "Por: R$ 3.999,00"
         expected = 3999.0
@@ -58,11 +65,12 @@ class ChallengeTest(unittest.TestCase):
         result = challenge.fetch_html_from_url(url)
         self.assertTrue(expected.startswith(expected), result)
 
-    def test_check_if_redirect_happened(self):
+    def test_return_empty_if_redirected(self):
         url = "http://www.americanas.com.br/produto/spam_and_eggs"
-        expected = "Redirect to home."
+        expected = ""
         result = challenge.fetch_html_from_url(url)
-        self.assertTrue(result.find(expected) > 0)
+        self.assertEqual(expected, result)
+        
 
     #TODO: add more tests
 
