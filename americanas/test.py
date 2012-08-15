@@ -23,14 +23,21 @@ class ChallengeTest(unittest.TestCase):
     def test_get_price_from_html(self):
         html = self.get_html('example.html')
         xpath = "//p[@class='sale price']//span[@class='amount']/text()"
-        result = challenge.get_raw_price(html, xpath)
         expected = "Por: R$ 3.999,00"
+        result = challenge.get_raw_price(html, xpath)
         self.assertEqual(expected, result)
 
-    def test_cleaning_price(self):
+    def test_cleaning_price_with_dot(self):
         raw_price = "Por: R$ 3.999,00"
         expected = 3999.0
-        self.assertEqual(expected, challenge.clean_price(raw_price))
+        result = challenge.clean_price(raw_price)
+        self.assertEqual(expected, result)
+
+    def test_cleaning_price_without_dots(self):
+        raw_price = "Por: R$ 42,42"
+        expected = 42.42
+        result = challenge.clean_price(raw_price)
+        self.assertEqual(expected, result)
 
 
     #TODO: add more tests

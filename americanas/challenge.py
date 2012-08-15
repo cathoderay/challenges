@@ -19,8 +19,8 @@ def get_raw_price(html, xpath):
 def clean_price(raw_price):
     return float(
             re.search('.*R\$ ([0-9.,]+).*', raw_price).group(1).
-                replace('.', '').
-                    replace(',', '.'))
+             replace('.', '').
+              replace(',', '.'))
 
 
 def fetch_html_from_url(url):
