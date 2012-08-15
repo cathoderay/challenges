@@ -6,13 +6,12 @@
 #
 
 import sys
-import optparse
 
 import requests 
 from lxml.html import fromstring
 
 
-def get_price(html, xpath):
+def get_raw_price(html, xpath):
     return fromstring(html).xpath(xpath)[0]
 
 
@@ -27,6 +26,6 @@ def get_html_from_url(url):
 if __name__ == "__main__":
     xpath = "//p[@class='sale price']//span[@class='amount']/text()" 
     if len(sys.argv) > 1:
-        print get_price(get_html_from_url(sys.argv[1]), xpath)
+        print get_raw_price(get_html_from_url(sys.argv[1]), xpath)
     else:
         print "Usage: ./challenge.py url"
