@@ -27,12 +27,6 @@ class ChallengeTest(unittest.TestCase):
         result = challenge.get_raw_price(html, xpath)
         self.assertEqual(expected, result)
 
-    def test_should_return_empty_if_doesnt_find_xpath(self):
-        html = self.get_html('example.html') 
-        xpath = "//p[@class='love is all you need']"
-        expected = ""
-        result = challenge.get_raw_price(html, xpath)
-
     def test_cleaning_price_with_dot(self):
         raw_price = "Por: R$ 3.999,00"
         expected = 3999.0
@@ -45,8 +39,21 @@ class ChallengeTest(unittest.TestCase):
         result = challenge.clean_price(raw_price)
         self.assertEqual(expected, result)
 
+    def test_get_raw_price_should_return_empty_if_doesnt_find_xpath(self):
+        html = self.get_html('example.html') 
+        xpath = "//p[@class='love is all you need']"
+        expected = ""
+        result = challenge.get_raw_price(html, xpath)
+        self.assertEqual(expected, result)
+
+    def test_cleaning_price_should_not_throw_exception(self):
+        raw_price = ""
+        expected = ""
+        result = challenge.clean_price(raw_price)
+        self.assertEqual(expected, result)
 
     #TODO: add more tests
        
+
 if __name__ == "__main__":
     unittest.main()

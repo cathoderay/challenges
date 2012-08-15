@@ -15,15 +15,18 @@ from lxml.html import fromstring
 def get_raw_price(html, xpath):
     try:
         return fromstring(html).xpath(xpath)[0]
-    except IndexError:
+    except Exception:
         return ''
 
 
 def clean_price(raw_price):
-    return float(
-            re.search('.*R\$ ([0-9.,]+).*', raw_price).group(1).
-             replace('.', '').
-              replace(',', '.'))
+    try:
+        return float(
+                re.search('.*R\$ ([0-9.,]+).*', raw_price).group(1).
+                 replace('.', '').
+                  replace(',', '.'))
+    except Exception:
+        return raw_price
 
 
 def fetch_html_from_url(url):
