@@ -29,7 +29,7 @@ class ChallengeTest(unittest.TestCase):
 
     def test_cleaning_price(self):
         raw_price = "Por: R$ 3.999,00"
-        expected = "3999.0"
+        expected = 3999.0
         self.assertEqual(expected, challenge.clean_price(raw_price))
 
 

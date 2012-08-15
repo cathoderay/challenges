@@ -17,7 +17,10 @@ def get_raw_price(html, xpath):
 
 
 def clean_price(raw_price):
-    return re.search('.*R\$ ([0-9.,]+).*', raw_price).group(1)
+    return float(
+            re.search('.*R\$ ([0-9.,]+).*', raw_price).group(1).
+                replace('.', '').
+                    replace(',', '.'))
 
 
 def fetch_html_from_url(url):
@@ -27,6 +30,6 @@ def fetch_html_from_url(url):
 if __name__ == "__main__":
     xpath = "//p[@class='sale price']//span[@class='amount']/text()" 
     if len(sys.argv) > 1:
-        print get_raw_price(fetch_html_from_url(sys.argv[1]), xpath)
+        print clean_price(get_raw_price(fetch_html_from_url(sys.argv[1]), xpath))
     else:
         print "Usage: ./challenge.py url"
