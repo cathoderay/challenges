@@ -5,6 +5,9 @@
 # Author: Ronald Kaiser <raios DOT catodicos AT gmail DOT com>
 #
 
+import sys
+import optparse
+
 import requests 
 from lxml.html import fromstring
 
@@ -22,7 +25,8 @@ def get_html_from_url(url):
 
 
 if __name__ == "__main__":
-    # Expected usage
-    url = "http://www.americanas.com.br/produto/111359833/informatica/apple/macbook/macbook-pro-md101bz/a-intel-core-i5-led-13.3_-4gb-500gb-apple"
     xpath = "//p[@class='sale price']//span[@class='amount']/text()" 
-    print get_price(get_html_from_url(url), xpath)
+    if len(sys.argv) > 1:
+        print get_price(get_html_from_url(sys.argv[1]), xpath)
+    else:
+        print "Usage: challenge url"
