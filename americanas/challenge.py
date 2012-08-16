@@ -47,8 +47,10 @@ def redirected_to_home(r):
 
 
 def fetch_html_from_url(url):
+    #TODO: too large string =(
+    headers = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.77 Safari/537.1'}
     try:
-        r = requests.get(url)
+        r = requests.get(url, headers=headers)
         if redirected_to_home(r):
             print "Redirect to home."
             return ""
