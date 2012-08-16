@@ -27,11 +27,11 @@ class ChallengeTest(unittest.TestCase):
         result = challenge.get_raw_price(html, xpath)
         self.assertEqual(expected, result)
 
-    def test_get_price_from_html(self):
+    def test_get_price_from_html_level_1_challenge(self):
         html = self.get_html('level1.html')
         xpath = "//div/text()"
-        expected = "44.99"
-        result = challenge.get_price(html, xpath)
+        expected = 44.99
+        result = challenge.clean_price(challenge.get_raw_price(html, xpath))
         self.assertEqual(expected, result)
 
     def test_detect_unavailable_product(self):

@@ -58,7 +58,7 @@ def fetch_html_from_url(url):
     return r.text
 
 
-def get_price(url, xpath, unv_xpath):
+def get_price(url, xpath, unv_xpath=None):
     return clean_price(
             get_raw_price(
              fetch_html_from_url(url), 
