@@ -2,7 +2,6 @@ from challenge import get_price
  
 
 def get_yes_link(r):
-    dir(r)
     from lxml import html
     import requests
     xpath = "//a[contains(text(), 'Sim')]/@href"
