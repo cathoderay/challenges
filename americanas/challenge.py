@@ -47,7 +47,7 @@ def redirected_to_home(r):
            r.history[0].headers['location'].lower() == "http://www.americanas.com.br/"
 
 
-def fetch_html_from_url(url, use_cookie=False):
+def fetch_html_from_url(url, use_cookie=False, after_fetch=None):
     #TODO: too large string =(
     headers = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.77 Safari/537.1'}
     try:
@@ -60,13 +60,15 @@ def fetch_html_from_url(url, use_cookie=False):
     except Exception, e:
         print "Can't fetch html from url. %s" % e
         return ""
+    if after_fetch:
+        return after_fetch(r)
     return r.text
 
 
-def get_price(url, xpath, unv_xpath=None, use_cookie=False):
+def get_price(url, xpath, unv_xpath=None, use_cookie=False, after_fetch=None):
     return clean_price(
             get_raw_price(
-             fetch_html_from_url(url, use_cookie), 
+             fetch_html_from_url(url, use_cookie, after_fetch),
              xpath,
              unv_xpath))
 
@@ -77,7 +79,6 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         print get_price(url=sys.argv[1], 
                         xpath=xpath, 
-                        unv_xpath=unv_xpath,
-                        use_cookie=False)
+                        unv_xpath=unv_xpath)
     else:
         print "Usage: ./challenge.py url"

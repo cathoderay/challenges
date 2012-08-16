@@ -19,7 +19,10 @@ class ChallengeTest(unittest.TestCase):
         """Kind of a requests mock"""
         path = os.path.join(EXAMPLES_PATH, filename)
         return open(path, 'r').read()
-        
+
+    def return_42(self, request):
+        return 42
+
     def test_get_price_from_html_happy_path(self):
         html = self.get_html('example.html')
         xpath = "//p[@class='sale price']//span[@class='amount']/text()"
@@ -85,7 +88,13 @@ class ChallengeTest(unittest.TestCase):
         expected = "R$ 3.999,00"
         result = challenge.fetch_html_from_url(url, use_cookie=True)
         self.assertTrue(result.find(expected) > 0)
-        
+
+    def test_adhoc_function_is_executed_after_fetch(self):
+        url = "http://www.google.com"        
+        expected = 42
+        result = challenge.fetch_html_from_url(url, after_fetch=self.return_42)
+        self.assertEqual(expected, result)
+
 
     #TODO: add more tests
 
