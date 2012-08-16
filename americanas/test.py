@@ -79,9 +79,9 @@ class ChallengeTest(unittest.TestCase):
         result = challenge.fetch_html_from_url(url)
         self.assertEqual(expected, result)
 
-    def test_get_cookie_and_redirect_fetch_html_from_url(self):
+    def test_get_cookie_and_redirect_(self):
         #WARNING: this test can fail due to unavailability of url
-        url = "hughes.sieve.com.br:9090/level2/"
+        url = "http://hughes.sieve.com.br:9090/level2/"
         expected = "R$ 3.999,00"
         result = challenge.fetch_html_from_url(url, use_cookie=True)
         self.assertTrue(result.find(expected) > 0)
