@@ -60,11 +60,11 @@ class ChallengeTest(unittest.TestCase):
         result = challenge.clean_price(raw_price)
         self.assertEqual(expected, result)
 
-    def test_should_not_raise_exception_when_url_does_not_exist(self):
+    def test_return_empty_when_url_does_not_exist(self):
         url = "http://youaresobeautiful4242.com"
-        expected = "Can't fetch html from url."
+        expected = ""
         result = challenge.fetch_html_from_url(url)
-        self.assertTrue(expected.startswith(expected), result)
+        self.assertEqual(expected, result)
 
     def test_return_empty_if_redirected(self):
         url = "http://www.americanas.com.br/produto/spam_and_eggs"
