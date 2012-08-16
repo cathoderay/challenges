@@ -20,11 +20,18 @@ class ChallengeTest(unittest.TestCase):
         path = os.path.join(EXAMPLES_PATH, filename)
         return open(path, 'r').read()
         
-    def test_get_price_from_html(self):
+    def test_get_price_from_html_happy_path(self):
         html = self.get_html('example.html')
         xpath = "//p[@class='sale price']//span[@class='amount']/text()"
         expected = "Por: R$ 3.999,00"
         result = challenge.get_raw_price(html, xpath)
+        self.assertEqual(expected, result)
+
+    def test_get_price_from_html(self):
+        html = self.get_html('level1.html')
+        xpath = "//div/text()"
+        expected = "44.99"
+        result = challenge.get_price(html, xpath)
         self.assertEqual(expected, result)
 
     def test_detect_unavailable_product(self):

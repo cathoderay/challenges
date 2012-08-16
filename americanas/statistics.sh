@@ -7,4 +7,6 @@ NUMBER_OF_SUCCESSES=`perl -e "print 100*(($NUMBER_OF_PRICES+$NUMBER_OF_UNAVAILAB
 
 echo "Number of requests: $NUMBER_OF_REQUESTS"
 echo "Number of prices got: $NUMBER_OF_PRICES"
+echo "Number of unavailables got: $NUMBER_OF_UNAVAILABLES"
+echo "Number of prices + unavailables: `echo $(($NUMBER_OF_PRICES+$NUMBER_OF_UNAVAILABLES))`"
 echo "Percentage of possibly successes: $NUMBER_OF_SUCCESSES"
