@@ -6,6 +6,7 @@
 #
 
 # TODO: change structure to support short circuit
+# TODO: refactoring
 
 
 import re
