@@ -7,11 +7,10 @@ def get_yes_link(r):
     xpath = "//a[contains(text(), 'Sim')]/@href"
     subpath = html.fromstring(r.text).xpath(xpath)[0]
     url = "http://hughes.sieve.com.br:9090%s" % subpath
-    headers = {'user-agent': 'Opera/9.99 (X11; U; sk)'}
-    g = requests.get(url, headers=headers)
+    g = requests.get(url)
     # yes, i agree it's not elegant, =P
     # TODO: check how to treat response headers properly, e.g. Set-Cookie:18=+; Path=/
-    return requests.get('http://hughes.sieve.com.br:9090/level3/', headers=headers, cookies=g.cookies).text
+    return requests.get('http://hughes.sieve.com.br:9090/level3/', cookies=g.cookies).text
 
 
 url = "http://hughes.sieve.com.br:9090/level3/"
