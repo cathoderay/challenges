@@ -41,10 +41,10 @@ def clean_price(raw_price):
         return raw_price
 
 
-def redirected_to_home(r):
+def redirected_to_home(r, home="http://www.americanas.com.br/"):
     return len(r.history) > 0 and \
            str(r.history[0].status_code).startswith('3') and \
-           r.history[0].headers['location'].lower() == "http://www.americanas.com.br/"
+           r.history[0].headers['location'].lower() == home 
 
 
 def fetch_html_from_url(url, use_cookie=False, after_fetch=None):
