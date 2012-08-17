@@ -48,8 +48,7 @@ def redirected_to_home(r):
 
 
 def fetch_html_from_url(url, use_cookie=False, after_fetch=None):
-    #TODO: too large string =(
-    headers = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.77 Safari/537.1'}
+    headers = {'user-agent': 'Opera/9.99 (X11; U; sk)'}
     try:
         r = requests.get(url, headers=headers)
         if use_cookie:
