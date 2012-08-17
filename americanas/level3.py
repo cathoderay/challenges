@@ -16,4 +16,4 @@ def get_yes_link(r):
 
 url = "http://hughes.sieve.com.br:9090/level3/"
 xpath = "//p/text()"
-print get_price(url, xpath, use_cookie=True, after_fetch=get_yes_link)
+print get_price(url, xpath, after_fetch=get_yes_link)
